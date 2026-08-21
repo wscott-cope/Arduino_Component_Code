@@ -1,0 +1,67 @@
+
+
+/*Arduino common component code blocks to be placed before void setup*/
+
+
+
+/******************************************/
+/*4x3 Keypad (Place prior to void setup())*/
+/******************************************/
+
+#include <Keypad.h> // Library for keypad input device
+
+char customKey; // Variable used to det input from the keypag
+
+const byte ROWS = 4; // used by the keypad array to map the buttons
+const byte COLS = 3; // used by the keypad array to map the buttons
+
+byte rowPins[ROWS] = {33, 34, 35, 36}; // match these to the inputs used by the first 4 pins on the keypad
+byte colPins[COLS] = {37, 38, 39}; // match these to the inputs used by the last 3 pins on the keypad
+
+char keys[ROWS][COLS] = {
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+  {'*','0','#'}
+}; //Keypad array used to map buttions to inputs
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); // Create keypad object using key map, row pins, column pins, and keypad dimensions
+/***********************************************************************************************************************************************************************************************************************/
+
+
+
+
+/******************************************************************/
+/*LCD Display with I2C Communication (Place prior to void setup())*/
+/******************************************************************/
+
+#include <LiquidCrystal_I2C.h> // LCD Display Library
+#include <Wire.h> // I2C Comminication for LCD Display
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+/***********************************************************************************************************************************************************************************************************************/
+
+
+
+
+/*Arduino common component code to be placed in void setup*/
+
+
+
+/*****************************************/
+/*LCD Display Setup (Place in void setup)*/
+/*****************************************/
+
+lcd.init(); // Initiate the LCD Display
+lcd.backlight(); // Set the LCD Backlight to ON
+/***********************************************************************************************************************************************************************************************************************/
+
+
+
+
+
+/*Arduino common component code to be placed in void loop*/
+
+
+
+char key = keypad.getKey(); // (to be used with a keypad) creates 'key' variable to collect the key entered on the keypad
